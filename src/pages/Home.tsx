@@ -1,4 +1,6 @@
 import ChartExpend from "../components/ChartExpend";
+import IncomeTable from "../components/IncomeTable";
+import ExpendTable from "../components/ExpendTable";
 
 const Home = () => {
     return (
@@ -22,6 +24,8 @@ const Home = () => {
                 </div>
             </div>
             <ChartExpend />
+            <IncomeTable />
+            <ExpendTable />
         </>
     );
     };
