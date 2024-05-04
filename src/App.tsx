@@ -1,19 +1,20 @@
 import LedgerForm from "./components/LedgerForm"
-
-
-
+import { Routes, Route } from 'react-router-dom'
+import Layout from "./Layout";
 
 function App() {
   
 
   return (
-    <>
-    <div className='container mx-auto mt-4 md:max-w-[450px] lg:max-w-[450px] '>
-      <LedgerForm/>
-     
-    </div>
-    </>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<LedgerForm />} />
+        <Route path="/add" element={<LedgerForm />} />
+      </Routes>
+    </Layout>
   )
 }
+
+
 
 export default App
