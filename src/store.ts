@@ -19,13 +19,13 @@ import { hostname } from "./host";
 
 
 export const useLedgerStore = create(
-
+    persist(
         (set) => ({
             ledger: {
-                income: 0,
-                expense: 0,
-                todayexpense: 0,
-                thismonthexpense: 0,
+                // income: 0,
+                // expense: 0,
+                // todayexpense: 0,
+                // thismonthexpense: 0,
             },
             fetchLedger: async () => {
                 try {
@@ -41,4 +41,9 @@ export const useLedgerStore = create(
                 }
             },
         }),
+        {
+            name: "ledger-storage",
+           
+        }
+    )
 );

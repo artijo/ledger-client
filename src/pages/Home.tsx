@@ -7,10 +7,11 @@ import { useEffect } from "react";
 
 const Home = () => {
     const fetchLedger = useLedgerStore((state:any) => state.fetchLedger);
-    
     const ledger = useLedgerStore((state:any) => state.ledger);
+    console.log(ledger);
     useEffect(() => {
-        fetchLedger();
+        //if ledger eqial empty object then fetchLedger
+        if (Object.keys(ledger).length === 0) fetchLedger();
     }, []);
     return (
         <>
@@ -28,8 +29,8 @@ const Home = () => {
                     <p>{ledger.income}</p>
                 </div>
                 <div>
-                    Balance
-                    <p>500</p>
+                    Expense
+                    <p>{ledger.expense}</p>
                 </div>
             </div>
             <ChartExpend />
