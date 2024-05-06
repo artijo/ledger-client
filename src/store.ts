@@ -34,7 +34,6 @@ export const useLedgerStore = create(
                             Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRpam8ubWVAaG90bWFpbC5jb20iLCJpYXQiOjE3MTQ1NzMzNTF9.5haaboIVOqH5Xr8t2QwFl0HXUdm6QDfsH3siQCYQ76k`,
                         },
                     });
-                    console.log(res.data);
                     set({ ledger: res.data });
                 } catch (error) {
                     console.log(error);
