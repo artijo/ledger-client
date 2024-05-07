@@ -32,11 +32,12 @@ const IncomeTable: React.FC = () => {
         <TableBody>
           {data?.map((item) => (
             <TableRow key={item._id}>
-              <TableCell>{
-                // Use the toLocaleString method to format the datetime
-                new Date(item.date).toLocaleString()
-              
-                }</TableCell>
+              <TableCell>
+                {
+                  // Use the toLocaleString method to format the datetime
+                  new Date(item.date).toLocaleString()
+                }
+              </TableCell>
               <TableCell>{item.title}</TableCell>
               <TableCell>{item.description}</TableCell>
               <TableCell>{item.amount}</TableCell>
