@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { persist, createJSONStorage } from "zustand/middleware";
+import { persist } from "zustand/middleware";
 import axios from "axios";
 import { hostname } from "./host";
 
@@ -42,7 +42,6 @@ export const useLedgerStore = create(
         }),
         {
             name: "ledger-storage",
-           
         }
     )
 );
