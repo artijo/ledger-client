@@ -4,15 +4,21 @@ import ExpendTable from "../components/ExpendTable";
 
 import { useLedgerStore } from "../store";
 import { useEffect } from "react";
+import { useCookies } from "react-cookie";
+
 
 const Home = () => {
     const fetchLedger = useLedgerStore((state:any) => state.fetchLedger);
     const ledger = useLedgerStore((state:any) => state.ledger);
-    console.log(ledger);
+    const [cookies] = useCookies(['token']);
     useEffect(() => {
         //if ledger eqial empty object then fetchLedger
         if (Object.keys(ledger).length === 0) fetchLedger();
     }, []);
+
+    if (!cookies.token) {
+        return <h1>Please Login</h1>;
+    }
     return (
         <>
             <div className="flex gap-4">

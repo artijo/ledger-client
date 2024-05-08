@@ -3,20 +3,6 @@ import { persist } from "zustand/middleware";
 import axios from "axios";
 import { hostname } from "./host";
 
-// type Store = {
-//   count: number
-//   increment: () => void
-//   decrement: () => void
-// }
-// type useLedgerStore = {
-//     ledger: {
-//         income: number;
-//         expense: number;
-//         todayexpense: number;
-//         thismonthexpense: number;
-//     };
-// };
-
 
 export const useLedgerStore = create(
     persist(
@@ -42,6 +28,18 @@ export const useLedgerStore = create(
         }),
         {
             name: "ledger-storage",
+        }
+    )
+);
+
+export const useUserStore = create(
+    persist(
+        (set) => ({
+            user: null,
+            setUser: (user:any) => set({ user }),
+        }),
+        {
+            name: "user-storage",
         }
     )
 );
