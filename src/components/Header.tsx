@@ -32,6 +32,7 @@ export default function Header() {
             setUser(user);
             }).catch((error) => {
                 console.log(error);
+                alert("Login failed");
             });
             
           })
