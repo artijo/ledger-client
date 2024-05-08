@@ -1,11 +1,10 @@
 import React, { ReactNode } from 'react';
+import Header from './components/Header';
 
 const Layout: React.FC<{ children: ReactNode }> = ({ children }) => {
     return (
         <>
-        <header>
-            <h1>Header</h1>
-        </header>
+        <Header />
         <main className='container mx-auto'>
             {children}
         </main>

@@ -15,13 +15,13 @@ const ExpendTable: React.FC = () => {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
   return (
-    <>
+    <div className="w-full">
       <h1>Expend Items</h1>
       <Table>
         <TableCaption>Expend Items</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Date</TableHead>
+            <TableHead>Date</TableHead>
             <TableHead>Title</TableHead>
             <TableHead>Description</TableHead>
             <TableHead>Cost</TableHead>
@@ -40,7 +40,7 @@ const ExpendTable: React.FC = () => {
           ))}
         </TableBody>
       </Table>
-    </>
+    </div>
   );
 };
 

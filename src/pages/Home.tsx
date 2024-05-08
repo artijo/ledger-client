@@ -34,8 +34,10 @@ const Home = () => {
                 </div>
             </div>
             <ChartExpend />
+            <div className="lg:flex gap-4">
             <IncomeTable />
             <ExpendTable />
+            </div>
         </>
     );
     };

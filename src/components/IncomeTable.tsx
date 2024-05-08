@@ -16,13 +16,13 @@ const IncomeTable: React.FC = () => {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
   return (
-    <>
+    <div className="w-full">
       <h1>Income Items</h1>
       <Table>
         <TableCaption>Income Items</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Date</TableHead>
+            <TableHead>Date</TableHead>
             <TableHead>Title</TableHead>
             <TableHead>Description</TableHead>
             <TableHead>Cost</TableHead>
@@ -46,7 +46,7 @@ const IncomeTable: React.FC = () => {
           ))}
         </TableBody>
       </Table>
-    </>
+    </div>
   );
 };
 
