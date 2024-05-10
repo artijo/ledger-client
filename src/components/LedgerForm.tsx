@@ -3,14 +3,18 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
+import axios from "axios";
+import { redirect } from "react-router-dom";
+import { useLedgerStore } from "../store";
 
+type Inputs = {
+  title: string;
+  description: string;
+  amount: number;
+  type: string;
+};
 export default function LedgerForm() {
-  type Inputs = {
-    title: string;
-    description: string;
-    type: string;
-  };
-
+  const fetchLedger = useLedgerStore((state: any) => state.fetchLedger);
   const {
     register,
     handleSubmit,
@@ -18,6 +22,30 @@ export default function LedgerForm() {
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(data);
+    const formdata = {
+      title: data.title,
+      description: data.description,
+      amount: data.amount,
+      type: data.type,
+    }
+
+    axios
+      .post("http://localhost:4000/ledgers", formdata, {
+        headers: {
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRpam8ubWVAaG90bWFpbC5jb20iLCJpYXQiOjE3MTQ1NzMzNTF9.5haaboIVOqH5Xr8t2QwFl0HXUdm6QDfsH3siQCYQ76k`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        fetchLedger();
+        if (res.status === 201) {
+          return redirect("/");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
   };
   return (
     <>
@@ -31,23 +59,23 @@ export default function LedgerForm() {
         {errors.title && <p>{errors.title.message}</p>}
         <Label>รายละเอียด</Label>
         <Input {...register("description")} type="text" />
+        <Label>จำนวนเงิน</Label>
+        <Input {...register("amount",{
+          required: "กรุณากรอกจำนวนเงิน",
+          valueAsNumber: true,
+          min: {value: 0, message: "กรุณากรอกจำนวนเงินมากกว่า 0"}
+        
+        })} type="number" />
+        {errors.amount && <p>{errors.amount.message}</p>}
         <Label>ประเภท</Label>
 
-        {/* <select {...register("type")}>
-          <option value="income">รายรับ</option>
-          <option value="expense">รายจ่าย</option>
-        </select> */}
 
-        <RadioGroup defaultValue="income" {...register("type")}>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="income" id="income" />
-            <Label htmlFor="income">รายรับ</Label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="expense" id="expense" />
-            <Label htmlFor="expense">รายจ่าย</Label>
-          </div>
-        </RadioGroup>
+        <input type="radio" {...register("type", { required: "กรุณาเลือกประเภท" })} value="income" />
+        <label>รายรับ</label>
+        <input type="radio" {...register("type", { required: "กรุณาเลือกประเภท" })} value="expense" />
+        <label>รายจ่าย</label>
+
+        
 
         {errors.type && <p>{errors.type.message}</p>}
         <br />
