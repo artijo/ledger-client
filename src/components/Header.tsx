@@ -46,24 +46,18 @@ export default function Header() {
       };
 
         useEffect(() => {
-           onAuthStateChanged(auth, (user) => {
-            if (user) {
-                if(!cookies.token) {
-                    LoginWithGoogle(user.email!).then((login) => {
-                        //set expire 7 days
-                        console.log(login.token);
-                        setCookie('token', login.token, {expires: new Date(Date.now() + 604800000)});
-                        setUser(user);
-                    }).catch((error) => {
-                        console.log(error);
-                    });
-                }
-            } 
-            });
-           
-            if (user) {
-                console.log(user);
+          if (user) {
+            if(!cookies.token) {
+                LoginWithGoogle(user.email!).then((login) => {
+                    //set expire 7 days
+                    console.log(login.token);
+                    setCookie('token', login.token, {expires: new Date(Date.now() + 604800000)});
+                    setUser(user);
+                }).catch((error) => {
+                    console.log(error);
+                });
             }
+        }
         }, []);
     
   return (

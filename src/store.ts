@@ -7,12 +7,7 @@ import { hostname } from "./host";
 export const useLedgerStore = create(
     persist(
         (set) => ({
-            ledger: {
-                // income: 0,
-                // expense: 0,
-                // todayexpense: 0,
-                // thismonthexpense: 0,
-            },
+            ledger: {},
             fetchLedger: async () => {
                 try {
                     const res = await axios.get(`${hostname}/ledgers/overview`,{

@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { useExpense } from "../Hooks/useEnpense";
+import { useExpense } from "../Hooks/useExpense";
 
 const ExpendTable: React.FC = () => {
   const { data, isLoading, error } = useExpense();
