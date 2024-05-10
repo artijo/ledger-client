@@ -4,7 +4,6 @@ import { Label } from "./ui/label";
 import { Button } from "./ui/button";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import axios from "axios";
-import { redirect } from "react-router-dom";
 import { useLedgerStore } from "../store";
 
 type Inputs = {
@@ -18,6 +17,7 @@ export default function LedgerForm() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting, isSubmitSuccessful, isSubmitted },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => {
@@ -38,8 +38,11 @@ export default function LedgerForm() {
       .then((res) => {
         console.log(res);
         fetchLedger();
+        //clear form
+        reset();
+
         if (res.status === 201) {
-          return redirect("/");
+          window.location.href = "/";
         }
       })
       .catch((error) => {
