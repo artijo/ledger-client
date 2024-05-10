@@ -12,6 +12,7 @@ import { useIncome } from "../Hooks/useIncome";
 
 const IncomeTable: React.FC = () => {
   const { data, isLoading, error } = useIncome();
+  data?.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 10);
   // Use the destructured variables in your code
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;

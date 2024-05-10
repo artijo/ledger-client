@@ -12,6 +12,8 @@ import { useExpense } from "../Hooks/useExpense";
 
 const ExpendTable: React.FC = () => {
   const { data, isLoading, error } = useExpense();
+  //sort the data by date and slice the first 10 items
+  data?.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 10);
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
   return (
