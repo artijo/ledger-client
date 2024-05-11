@@ -9,16 +9,23 @@ import {
   TableRow,
 } from "./ui/table";
 import { useIncome } from "../Hooks/useIncome";
+import { useLocation, Link } from "react-router-dom";
 
 const IncomeTable: React.FC = () => {
+  const {pathname} = useLocation();
   const { data, isLoading, error } = useIncome();
-  data?.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 10);
+  if (pathname !== "/income") data?.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 10); else data?.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   // Use the destructured variables in your code
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
   return (
     <div className="w-full">
+      <div className="flex justify-between items-center">
       <h1>Income Items</h1>
+      {pathname !== "/income" && (
+        <Link to="/income">View All</Link>
+      )}
+      </div>
       <Table>
         <TableCaption>Income Items</TableCaption>
         <TableHeader>

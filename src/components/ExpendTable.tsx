@@ -9,16 +9,22 @@ import {
   TableRow,
 } from "./ui/table";
 import { useExpense } from "../Hooks/useExpense";
+import { useLocation, Link } from "react-router-dom";
 
 const ExpendTable: React.FC = () => {
+  const { pathname } = useLocation();
   const { data, isLoading, error } = useExpense();
-  //sort the data by date and slice the first 10 items
-  data?.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 10);
+  if (pathname !== "/expend") data?.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 10) ; else data?.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
   return (
     <div className="w-full">
-      <h1>Expend Items</h1>
+      <div className="flex justify-between items-center">
+        <h1>Income Items</h1>
+        {pathname !== "/expend" && (
+          <Link to="/expend">View All</Link>
+        )}
+      </div>
       <Table>
         <TableCaption>Expend Items</TableCaption>
         <TableHeader>
